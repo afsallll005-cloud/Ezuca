@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in – Eductix</title>
+    <!-- Google Fonts: Geist & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/eductix.css">
+
+    <style>
+        .auth-page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #eaf0ef 0%, #f3faf5 100%);
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-card-container {
+            width: 100%;
+            max-width: 960px;
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid rgba(0, 59, 45, 0.08);
+            box-shadow: 0 20px 60px rgba(0, 59, 45, 0.08);
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .auth-visual-side {
+            background: var(--eductix-forest);
+            color: white;
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-visual-side::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -30%;
+            width: 350px;
+            height: 350px;
+            background: var(--eductix-emerald);
+            filter: blur(100px);
+            opacity: 0.35;
+        }
+
+        .auth-visual-content h3 {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+
+        .auth-visual-content p {
+            font-size: 15px;
+            color: #b2d4c6;
+            line-height: 1.6;
+        }
+
+        .auth-form-side {
+            padding: 50px 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .auth-form-header {
+            margin-bottom: 28px;
+        }
+
+        .auth-form-header h2 {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--eductix-forest);
+            letter-spacing: -0.03em;
+            margin-bottom: 6px;
+        }
+
+        .auth-form-header p {
+            font-size: 14.5px;
+            color: var(--eductix-muted);
+        }
+
+        .form-input-group {
+            margin-bottom: 18px;
+        }
+
+        .form-input-group label {
+            display: block;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--eductix-slate);
+            margin-bottom: 6px;
+        }
+
+        .form-input-group input {
+            width: 100%;
+            padding: 13px 18px;
+            background: var(--eductix-card-mint);
+            border: 1px solid rgba(0, 59, 45, 0.12);
+            border-radius: 12px;
+            font-size: 15px;
+            color: var(--eductix-dark);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-input-group input:focus {
+            background: #ffffff;
+            border-color: var(--eductix-emerald);
+            box-shadow: 0 0 0 3px rgba(13, 136, 60, 0.12);
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 24px 0;
+            color: var(--eductix-light-muted);
+            font-size: 13px;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(0, 59, 45, 0.08);
+        }
+
+        .auth-divider span {
+            padding: 0 12px;
+        }
+
+        .auth-social-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 11px;
+            border: 1px solid rgba(0, 59, 45, 0.12);
+            background: var(--eductix-white);
+            border-radius: 12px;
+            font-size: 16px;
+            color: var(--eductix-slate);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-btn:hover {
+            border-color: var(--eductix-emerald);
+            background: var(--eductix-card-mint);
+            transform: translateY(-2px);
+        }
+
+        .auth-switch-text {
+            text-align: center;
+            font-size: 14px;
+            color: var(--eductix-muted);
+            margin-top: 16px;
+        }
+
+        .auth-switch-text a {
+            color: var(--eductix-emerald);
+            font-weight: 600;
+        }
+
+        .auth-switch-text a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .auth-card-container {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-visual-side {
+                display: none;
+            }
+
+            .auth-form-side {
+                padding: 36px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-page-wrapper">
+        <!-- Ambient mesh glows -->
+        <div class="eductix-glow-orb glow-orb-forest" style="top: -100px; left: -100px;"></div>
+        <div class="eductix-glow-orb glow-orb-emerald" style="bottom: -100px; right: -100px;"></div>
+
+        <div class="auth-card-container">
+            <!-- Left Visual Side -->
+            <div class="auth-visual-side">
+                <div>
+                    <a href="/" class="eductix-brand" style="color: white; margin-bottom: 40px; display: inline-flex;">
+                        Eductix<span class="brand-dot"></span>
+                    </a>
+                    <div class="auth-visual-content">
+                        <h3>Welcome Back to Your Learning Path</h3>
+                        <p>Pick up right where you left off. Continue your lessons, work on portfolio projects, and connect with mentors.</p>
+                    </div>
+                </div>
+
+                <div style="padding: 16px; background: rgba(255, 255, 255, 0.1); border-radius: 14px; backdrop-filter: blur(8px);">
+                    <div style="font-size: 13px; color: #a3d9be; font-weight: 600; margin-bottom: 4px;">STUDENT COMMUNITY</div>
+                    <div style="font-size: 14px; color: #ffffff;">Over 30,000+ active learners advancing their skills daily.</div>
+                </div>
+            </div>
+
+            <!-- Right Form Side -->
+            <div class="auth-form-side">
+                <div class="auth-form-header">
+                    <h2>Log in to your account</h2>
+                    <p>Enter your credentials to access your courses.</p>
+                </div>
+
+                <form action="/userlogin" method="post">
+                    <div class="form-input-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                    </div>
+
+                    <div class="form-input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="btn-eductix-primary" style="width: 100%; justify-content: center; margin-top: 10px; padding: 14px;">
+                        <span>Continue</span>
+                        <span class="icon-circle">↗</span>
+                    </button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>Or continue with</span>
+                </div>
+
+                <div class="auth-social-row">
+                    <button class="social-btn"><i class="fab fa-google"></i></button>
+                    <button class="social-btn"><i class="fab fa-facebook-f"></i></button>
+                    <button class="social-btn"><i class="fab fa-apple"></i></button>
+                </div>
+
+                <p class="auth-switch-text">
+                    Don't have an account? <a href="/usersignup">Sign up</a>
+                </p>
+                <p class="auth-switch-text" style="font-size: 12.5px; margin-top: 8px;">
+                    <a href="/" style="color: var(--eductix-muted);">← Return to Homepage</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

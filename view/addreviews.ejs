@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Review</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f4f6fb;
+        }
+
+        /* LAYOUT */
+
+        .layout {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 230px;
+            background: white;
+            height: 100vh;
+            padding: 25px;
+            border-right: 1px solid #eee;
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .sidebar ul li:hover {
+            background: #f1f2f6;
+        }
+
+        .active {
+            background: #f1f2f6;
+            font-weight: 600;
+        }
+
+        /* MAIN */
+
+        .main {
+            flex: 1;
+            padding: 30px;
+        }
+
+        /* TOPBAR */
+
+        /* TOPBAR */
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .menu a {
+            margin-right: 20px;
+            color: #555;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .top-right {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-right input {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+
+        .download {
+            background: #2257d3;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        #activee {
+            font-weight: bold;
+            color: #f97263;
+        }
+
+        /* CARD */
+
+        .review-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 750px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .review-card h2 {
+            margin-bottom: 25px;
+        }
+
+        /* FORM */
+
+        .form-row {
+            margin-bottom: 18px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row label {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .form-row input,
+        .form-row textarea,
+        .form-row select {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .form-row textarea {
+            height: 90px;
+            resize: none;
+        }
+
+        .submit-btn {
+            margin-top: 10px;
+            padding: 12px;
+            border: none;
+            background: #6366f1;
+            color: white;
+            font-size: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #4f46e5;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <!-- SIDEBAR -->
+
+        <div class="sidebar">
+
+            <h2 class="logo">Shadcn Admin</h2>
+
+            <ul>
+                <li><a href="/admin/panel">Dashboard</a></li>
+                <li><a href="/admin/allcourse">Courses</a></li>
+                <li class="active"><a href="/admin/addreview">Reviews</a></li>
+                <li>Chats</li>
+                <li>Users</li>
+            </ul>
+
+        </div>
+
+        <!-- MAIN -->
+
+        <div class="main">
+
+            <div class="topbar">
+
+                <div class="menu">
+                    <a href="/admin/allcourse">Courses</a>
+                    <a href="/admin/addcourse">Add Course</a>
+                    <a href="/admin/addthumbanile">Set Thumbnail</a>
+                    <a href="/admin/addreview" id="activee">Add Reviews</a>
+                    <a>Settings</a>
+                </div>
+
+                <div class="top-right">
+                    <input type="text" placeholder="Search">
+                    <a href="/admin/addcourse"> <button class="download" onclick="openModal()">+ Add
+                            Course</button></a>
+                </div>
+
+            </div>
+
+            <!-- REVIEW FORM -->
+
+            <div class="review-card">
+
+                <h2>Add Student Review</h2>
+
+                <form action="/admin/addreview" method="POST" enctype="multipart/form-data">
+
+                    <div class="form-row">
+                        <label>Student Name</label>
+                        <input type="text" name="studentName" placeholder="Enter student name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Course Name</label>
+                        <input type="text" name="courseName" placeholder="Enter course name">
+                    </div>
+
+                    <!-- <div class="form-row">
+                        <label>Rating</label>
+                        <select name="rating">
+                            <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                            <option value="4">⭐⭐⭐⭐ (4)</option>
+                            <option value="3">⭐⭐⭐ (3)</option>
+                            <option value="2">⭐⭐ (2)</option>
+                            <option value="1">⭐ (1)</option>
+                        </select>
+                    </div> -->
+
+                    <div class="form-row">
+                        <label>Review Message</label>
+                        <textarea name="review" placeholder="Write student review"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Student Image</label>
+                        <input type="file" name="studentImage">
+                    </div>
+
+                    <button class="submit-btn">Add Review</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

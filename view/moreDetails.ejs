@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= MoreDetails ? MoreDetails.courseName : 'Course Details' %> – Eductix</title>
+    <!-- Google Fonts: Geist & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/eductix.css">
+
+    <style>
+        .details-hero {
+            background: var(--eductix-forest);
+            color: white;
+            padding: 70px 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .details-hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 450px;
+            height: 450px;
+            background: var(--eductix-emerald);
+            filter: blur(120px);
+            opacity: 0.35;
+        }
+
+        .details-hero-title {
+            font-family: var(--font-heading);
+            font-size: 44px;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.15;
+            color: #ffffff;
+            margin-bottom: 14px;
+        }
+
+        .details-hero-desc {
+            font-size: 18px;
+            color: #b2d6c6;
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        .details-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 48px;
+            margin-top: -40px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .content-card {
+            background: var(--eductix-white);
+            border-radius: var(--radius-card);
+            padding: 36px;
+            border: 1px solid var(--eductix-border-card);
+            box-shadow: var(--eductix-card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .sidebar-card {
+            background: var(--eductix-white);
+            border-radius: var(--radius-card);
+            padding: 32px;
+            border: 1px solid var(--eductix-border-card);
+            box-shadow: var(--eductix-card-shadow);
+            position: sticky;
+            top: 100px;
+        }
+
+        .meta-pills-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 30px;
+            background: var(--eductix-card-mint);
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--eductix-forest);
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-field label {
+            display: block;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--eductix-slate);
+            margin-bottom: 6px;
+        }
+
+        .form-field input,
+        .form-field select {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--eductix-card-mint);
+            border: 1px solid rgba(0, 59, 45, 0.12);
+            border-radius: 12px;
+            font-size: 14.5px;
+            color: var(--eductix-dark);
+            outline: none;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus {
+            background: white;
+            border-color: var(--eductix-emerald);
+            box-shadow: 0 0 0 3px rgba(13, 136, 60, 0.12);
+        }
+
+        .feature-checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .feature-checklist li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14.5px;
+            color: var(--eductix-slate);
+        }
+
+        .check-badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--eductix-emerald-light);
+            color: var(--eductix-emerald);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px) {
+            .details-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- OFFER BAR -->
+    <div class="eductix-offer-bar">
+        <span class="badge">Course Overview</span>
+        <span>Enroll now and get lifetime access to all course materials & updates.</span>
+        <a href="/" style="text-decoration: underline; color: #fff; font-weight: 600;">Back to Courses →</a>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="eductix-nav-wrapper">
+        <nav class="eductix-nav">
+            <a href="/" class="eductix-brand">
+                Eductix<span class="brand-dot"></span>
+            </a>
+
+            <ul class="eductix-nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/#course-section">Courses</a></li>
+                <li><a href="/#program-section">Programs</a></li>
+                <li><a href="/subscribe">Pricing</a></li>
+                <li><a href="/#faq-section">FAQ</a></li>
+            </ul>
+
+            <div class="eductix-nav-actions">
+                <a href="/cart" class="eductix-icon-btn" title="View Cart">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                </a>
+                <a href="/userlogin" class="btn-eductix-outline">Log in</a>
+                <a href="/usersignup" class="btn-eductix-primary">
+                    <span>Sign up</span>
+                    <span class="icon-circle">↗</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO HEADER -->
+    <section class="details-hero">
+        <div class="eductix-container">
+            <div class="pill-badge" style="background: rgba(255,255,255,0.15); color: #fff; border: none; margin-bottom: 16px;">
+                <span class="pill-dot" style="background: var(--eductix-emerald);"></span>
+                Featured Masterclass
+            </div>
+            <h1 class="details-hero-title">
+                Complete <%= MoreDetails ? MoreDetails.courseName : 'Course' %> Program
+            </h1>
+            <p class="details-hero-desc">
+                Learn <%= MoreDetails ? MoreDetails.description : 'practical in-demand skills with hands-on projects and professional mentorship.' %>
+            </p>
+        </div>
+    </section>
+
+    <!-- MAIN CONTAINER -->
+    <div class="eductix-container" style="padding: 0 32px 100px;">
+        <div class="details-layout">
+            <!-- Left Main Column -->
+            <div>
+                <!-- Overview Card -->
+                <div class="content-card">
+                    <h3 style="font-family: var(--font-heading); font-size: 26px; color: var(--eductix-forest); margin-bottom: 16px;">
+                        Course Overview
+                    </h3>
+                    <p style="color: var(--eductix-muted); line-height: 1.7; margin-bottom: 20px;">
+                        <strong>Eductix</strong> is a modern online learning platform designed to help students and professionals gain in-demand skills for today’s fast-paced digital economy. This course focuses on practical, portfolio-driven learning so you can confidently apply what you learn in real job scenarios.
+                    </p>
+
+                    <div class="meta-pills-row">
+                        <span class="meta-pill">⭐ 4.8 Rating (1,200+ reviews)</span>
+                        <span class="meta-pill">⏱ <%= MoreDetails ? MoreDetails.courseDuration : 'Self-Paced' %></span>
+                        <span class="meta-pill">🌐 English (Subtitles Included)</span>
+                        <span class="meta-pill">🏆 Certificate of Completion</span>
+                    </div>
+
+                    <!-- Daily Task / Practice Quiz Card -->
+                    <div style="background: var(--eductix-card-mint); border: 1px solid var(--eductix-border-subtle); border-radius: 16px; padding: 24px; margin-top: 24px;">
+                        <h4 style="font-size: 17px; font-weight: 700; color: var(--eductix-forest); margin-bottom: 6px;">
+                            🎯 Daily Assessment & Practice
+                        </h4>
+                        <p style="font-size: 14px; color: var(--eductix-muted); margin-bottom: 16px;">
+                            Test your knowledge with interactive coding challenges and quizzes to reinforce your understanding.
+                        </p>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn-eductix-primary" style="padding: 10px 20px; font-size: 14px;" onclick="alert('Quiz challenge starting...')">
+                                <span>Start Quiz</span>
+                                <span class="icon-circle">↗</span>
+                            </button>
+                            <a href="/syllabus" class="btn-eductix-secondary" style="padding: 10px 20px; font-size: 14px;">
+                                View Syllabus
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Registration / Seat Booking Form -->
+                <div class="content-card">
+                    <h3 style="font-family: var(--font-heading); font-size: 24px; color: var(--eductix-forest); margin-bottom: 6px;">
+                        Reserve Your Seat
+                    </h3>
+                    <p style="font-size: 14.5px; color: var(--eductix-muted); margin-bottom: 24px;">
+                        Fill in your details below to schedule an onboarding consultation or secure early-bird cohort pricing.
+                    </p>
+
+                    <form onsubmit="event.preventDefault(); alert('Seat reserved successfully! Our team will contact you.');">
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label>Your Name *</label>
+                                <input type="text" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-field">
+                                <label>Location / City *</label>
+                                <input type="text" placeholder="e.g. New York, London, Delhi" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-field">
+                                <label>Phone Number *</label>
+                                <input type="tel" placeholder="+1 (555) 000-0000" required>
+                            </div>
+                            <div class="form-field">
+                                <label>Selected Program</label>
+                                <input type="text" value="<%= MoreDetails ? MoreDetails.courseName : 'Web Development' %>" readonly>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-eductix-primary" style="margin-top: 10px; padding: 12px 28px;">
+                            <span>Confirm Reservation</span>
+                            <span class="icon-circle">↗</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div>
+                <div class="sidebar-card">
+                    <span style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--eductix-muted);">Full Course Fee</span>
+                    <div style="font-family: var(--font-heading); font-size: 44px; font-weight: 800; color: var(--eductix-forest); margin: 6px 0 16px;">
+                        ₹<%= MoreDetails ? MoreDetails.courseFee : '999' %>
+                    </div>
+
+                    <% if (MoreDetails && MoreDetails._id) { %>
+                        <a href="/addtocart?courseId=<%= MoreDetails._id %>" class="btn-eductix-primary" style="width: 100%; justify-content: center; margin-bottom: 12px; padding: 14px;">
+                            <span>Add to Cart</span>
+                            <span class="icon-circle">↗</span>
+                        </a>
+                    <% } %>
+
+                    <a href="/subscribe" class="btn-eductix-secondary" style="width: 100%; justify-content: center; margin-bottom: 24px;">
+                        Subscribe with Pro Plan
+                    </a>
+
+                    <ul class="feature-checklist">
+                        <li><span class="check-badge">✓</span> Full Lifetime Access</li>
+                        <li><span class="check-badge">✓</span> Official Certificate of Completion</li>
+                        <li><span class="check-badge">✓</span> 40+ Hours of Video Lessons</li>
+                        <li><span class="check-badge">✓</span> Downloadable Source Repositories</li>
+                        <li><span class="check-badge">✓</span> Instructor Q&A Support</li>
+                    </ul>
+
+                    <div style="border-top: 1px solid rgba(0,59,45,0.08); padding-top: 20px; display: flex; flex-direction: column; gap: 10px;">
+                        <a href="/syllabus" class="btn-eductix-outline" style="text-align: center;">
+                            📖 Download Syllabus
+                        </a>
+                        <a href="https://youtu.be/Yq0QkCxoTHM" target="_blank" class="btn-eductix-outline" style="text-align: center; color: var(--eductix-emerald); border-color: var(--eductix-emerald);">
+                            ▶ Watch Trial Lesson
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="eductix-footer">
+        <div class="eductix-container">
+            <div class="eductix-footer-grid">
+                <div class="footer-brand">
+                    <h3>Eductix<span style="color: var(--eductix-emerald);">.</span></h3>
+                    <p>Build Skills. Build Your Future. A modern education ecosystem designed for ambitious learners worldwide.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Navigation</h5>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#course-section">Courses</a></li>
+                        <li><a href="/subscribe">Pricing</a></li>
+                        <li><a href="/#faq-section">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Account</h5>
+                    <ul class="footer-links">
+                        <li><a href="/userlogin">Log in</a></li>
+                        <li><a href="/usersignup">Sign up</a></li>
+                        <li><a href="/cart">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Support</h5>
+                    <p style="font-size: 14px; color: #92b8a7;">Have questions about this course? Reach out to our mentors anytime.</p>
+                </div>
+            </div>
+
+            <div class="eductix-footer-bottom">
+                <p>© 2026 Eductix. All rights reserved.</p>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-back-to-top">
+                    <span>Back To Top</span>
+                    <span>↑</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

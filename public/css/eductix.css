@@ -1,0 +1,1839 @@
+/* ==========================================================================
+   EDUCTIX DESIGN SYSTEM - STYLESHEET
+   Matching the Framer Eductix Template Aesthetic
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Color Palette from Eductix Framer */
+    --eductix-forest: #003b2d;
+    --eductix-emerald: #0d883c;
+    --eductix-emerald-hover: #005843;
+    --eductix-emerald-glow: rgba(13, 136, 60, 0.4);
+    --eductix-emerald-light: rgba(13, 136, 60, 0.08);
+    --eductix-emerald-border: rgba(13, 136, 60, 0.25);
+    
+    --eductix-dark: #0a0915;
+    --eductix-slate: #36403d;
+    --eductix-muted: #4f635e;
+    --eductix-light-muted: #72827e;
+    
+    --eductix-bg-sage: #eaf0ef;
+    --eductix-card-mint: #f3faf5;
+    --eductix-white: #ffffff;
+    --eductix-purple-accent: #a5a6f6;
+    
+    --eductix-border-subtle: rgba(0, 59, 45, 0.1);
+    --eductix-border-card: rgba(0, 59, 45, 0.08);
+    --eductix-card-shadow: 0 10px 30px rgba(0, 59, 45, 0.05);
+    --eductix-card-shadow-hover: 0 16px 40px rgba(0, 59, 45, 0.12);
+    
+    /* Typography */
+    --font-heading: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* Radii */
+    --radius-pill: 60px;
+    --radius-card: 20px;
+    --radius-sm: 10px;
+}
+
+/* Base Resets */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: var(--eductix-bg-sage);
+    color: var(--eductix-dark);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ==========================================================================
+   AMBIENT GLOWS & BACKGROUND MESH
+   ========================================================================== */
+.eductix-ambient-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.eductix-glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.25;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.glow-orb-forest {
+    width: 500px;
+    height: 800px;
+    background: var(--eductix-forest);
+    top: -150px;
+    right: 5%;
+}
+
+.glow-orb-emerald {
+    width: 450px;
+    height: 600px;
+    background: var(--eductix-emerald);
+    top: 250px;
+    right: 20%;
+    opacity: 0.2;
+}
+
+.glow-orb-purple {
+    width: 400px;
+    height: 500px;
+    background: var(--eductix-purple-accent);
+    top: 350px;
+    right: 3%;
+    opacity: 0.18;
+}
+
+/* ==========================================================================
+   TOP ANNOUNCEMENT / OFFER BAR
+   ========================================================================== */
+.eductix-offer-bar {
+    background: var(--eductix-forest);
+    color: var(--eductix-card-mint);
+    padding: 10px 20px;
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    z-index: 100;
+    position: relative;
+}
+
+.eductix-offer-bar span.badge {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+/* ==========================================================================
+   NAVIGATION BAR
+   ========================================================================== */
+.eductix-nav-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    padding: 16px 32px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.eductix-nav {
+    max-width: 1280px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 59, 45, 0.08);
+    border-radius: var(--radius-pill);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 24px rgba(0, 59, 45, 0.04);
+}
+
+.eductix-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: var(--eductix-forest);
+}
+
+.eductix-brand .brand-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--eductix-emerald);
+    display: inline-block;
+    margin-left: 2px;
+}
+
+.eductix-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+}
+
+.eductix-nav-links a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--eductix-muted);
+    position: relative;
+    padding: 4px 0;
+}
+
+.eductix-nav-links a:hover,
+.eductix-nav-links a.active {
+    color: var(--eductix-dark);
+}
+
+.eductix-nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--eductix-emerald);
+    transition: width 0.25s ease;
+    border-radius: 2px;
+}
+
+.eductix-nav-links a:hover::after,
+.eductix-nav-links a.active::after {
+    width: 100%;
+}
+
+.eductix-search-pill {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.eductix-search-pill input {
+    background: var(--eductix-bg-sage);
+    border: 1px solid rgba(0, 59, 45, 0.08);
+    border-radius: var(--radius-pill);
+    padding: 9px 18px 9px 40px;
+    font-size: 14px;
+    color: var(--eductix-dark);
+    outline: none;
+    width: 220px;
+    transition: all 0.3s ease;
+}
+
+.eductix-search-pill input:focus {
+    width: 260px;
+    background: var(--eductix-white);
+    border-color: var(--eductix-emerald);
+    box-shadow: 0 0 0 3px rgba(13, 136, 60, 0.12);
+}
+
+.eductix-search-pill svg {
+    position: absolute;
+    left: 14px;
+    color: var(--eductix-muted);
+    pointer-events: none;
+    width: 16px;
+    height: 16px;
+}
+
+.eductix-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.eductix-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--eductix-bg-sage);
+    color: var(--eductix-forest);
+    border: 1px solid rgba(0, 59, 45, 0.08);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.eductix-icon-btn:hover {
+    background: var(--eductix-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 59, 45, 0.08);
+}
+
+.eductix-icon-btn .badge-count {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: var(--eductix-emerald);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 2px solid white;
+}
+
+/* ==========================================================================
+   BUTTONS & PILLS (EDUCTIX SIGNATURE DESIGN)
+   ========================================================================== */
+.btn-eductix-primary {
+    background-color: var(--eductix-emerald);
+    color: var(--eductix-white) !important;
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(13, 136, 60, 0.25);
+    text-decoration: none;
+}
+
+.btn-eductix-primary:hover {
+    background-color: var(--eductix-emerald-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(13, 136, 60, 0.35);
+}
+
+.btn-eductix-primary .icon-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    font-size: 12px;
+    transition: transform 0.2s ease;
+}
+
+.btn-eductix-primary:hover .icon-circle {
+    transform: translate(2px, -2px);
+}
+
+.btn-eductix-secondary {
+    background-color: var(--eductix-card-mint);
+    color: var(--eductix-forest) !important;
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--eductix-border-subtle);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-eductix-secondary:hover {
+    background-color: var(--eductix-white);
+    border-color: var(--eductix-emerald);
+    color: var(--eductix-emerald) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 59, 45, 0.08);
+}
+
+.btn-eductix-outline {
+    background: transparent;
+    color: var(--eductix-forest);
+    border: 1px solid rgba(0, 59, 45, 0.18);
+    padding: 9px 20px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-eductix-outline:hover {
+    border-color: var(--eductix-forest);
+    background: rgba(0, 59, 45, 0.04);
+}
+
+/* Tag Pills */
+.pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 18px;
+    border-radius: 50px;
+    background: var(--eductix-card-mint);
+    border: 1px solid var(--eductix-border-subtle);
+    color: var(--eductix-forest);
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.pill-badge .pill-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--eductix-emerald);
+    border-radius: 50%;
+}
+
+/* ==========================================================================
+   CONTAINERS & SECTION COMMONS
+   ========================================================================== */
+.eductix-section {
+    padding: 80px 32px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.eductix-container {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.section-header {
+    margin-bottom: 48px;
+}
+
+.section-header.text-center {
+    text-align: center;
+}
+
+.section-tagline {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--eductix-emerald);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 46px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    color: var(--eductix-forest);
+    margin-bottom: 16px;
+}
+
+.section-desc {
+    font-size: 18px;
+    color: var(--eductix-muted);
+    line-height: 1.6;
+    max-width: 580px;
+}
+
+.section-header.text-center .section-desc {
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.eductix-hero {
+    padding: 60px 32px 100px;
+    position: relative;
+    background: linear-gradient(180deg, #ffffff 0%, var(--eductix-bg-sage) 100%);
+    overflow: hidden;
+}
+
+.eductix-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.eductix-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+}
+
+.eductix-hero-title {
+    font-family: var(--font-heading);
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1.08;
+    color: var(--eductix-forest);
+}
+
+.eductix-hero-subtitle {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--eductix-muted);
+    max-width: 480px;
+}
+
+.eductix-hero-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.eductix-feature-mini-card {
+    background: var(--eductix-card-mint);
+    border: 1px solid var(--eductix-border-subtle);
+    border-radius: var(--radius-card);
+    padding: 20px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    max-width: 440px;
+    box-shadow: 0 4px 20px rgba(0, 59, 45, 0.04);
+}
+
+.eductix-feature-mini-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--eductix-emerald);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.eductix-feature-mini-text h5 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--eductix-dark);
+    margin-bottom: 4px;
+}
+
+.eductix-feature-mini-text p {
+    font-size: 13.5px;
+    color: var(--eductix-muted);
+    line-height: 1.4;
+}
+
+/* Hero Showcase Cluster */
+.eductix-hero-visual {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.showcase-card {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 12px 36px rgba(0, 59, 45, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.showcase-card:hover {
+    transform: translateY(-4px);
+}
+
+.showcase-card.card-large {
+    grid-column: span 1;
+    height: 380px;
+}
+
+.showcase-card.card-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.showcase-card.card-emerald {
+    background: var(--eductix-emerald);
+    color: white;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+}
+
+.showcase-card.card-forest {
+    background: var(--eductix-forest);
+    color: white;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+}
+
+.showcase-card.card-col2-tall {
+    height: 380px;
+    position: relative;
+}
+
+.showcase-card.card-col2-tall img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.showcase-card.card-col2-tall .overlay-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   TICKER / TRUST MARQUEE
+   ========================================================================== */
+.eductix-ticker-section {
+    padding: 36px 0;
+    background: var(--eductix-bg-sage);
+    border-top: 1px solid rgba(0, 59, 45, 0.06);
+    border-bottom: 1px solid rgba(0, 59, 45, 0.06);
+    overflow: hidden;
+}
+
+.eductix-ticker-title {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--eductix-muted);
+    margin-bottom: 24px;
+}
+
+.eductix-ticker-track {
+    display: flex;
+    gap: 40px;
+    width: max-content;
+    animation: tickerScroll 30s linear infinite;
+}
+
+.eductix-ticker-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes tickerScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 59, 45, 0.08);
+    border-radius: var(--radius-pill);
+    padding: 10px 24px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--eductix-slate);
+    white-space: nowrap;
+}
+
+.ticker-item .ticker-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--eductix-emerald);
+}
+
+/* ==========================================================================
+   STATS COUNTER SECTION
+   ========================================================================== */
+.eductix-stats-section {
+    padding: 80px 32px;
+}
+
+.eductix-stats-box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    padding: 40px 0;
+    border-top: 1px solid rgba(0, 59, 45, 0.12);
+    border-bottom: 1px solid rgba(0, 59, 45, 0.12);
+}
+
+.stat-item {
+    text-align: center;
+    position: relative;
+}
+
+.stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -16px;
+    top: 10%;
+    height: 80%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(0, 59, 45, 0.15), transparent);
+}
+
+.stat-number {
+    font-family: var(--font-heading);
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--eductix-forest);
+    line-height: 1.1;
+    margin-bottom: 6px;
+}
+
+.stat-label {
+    font-size: 15px;
+    color: var(--eductix-muted);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   PROGRAMS / SKILLS HIGHLIGHT CARDS
+   ========================================================================== */
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.program-card-wrap {
+    padding: 2px;
+    border-radius: var(--radius-card);
+    background: linear-gradient(224deg, var(--eductix-emerald-glow) 0%, rgba(255, 255, 255, 0.6) 50%, var(--eductix-emerald-glow) 100%);
+    box-shadow: 0 10px 30px rgba(0, 59, 45, 0.05);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.program-card-wrap:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(13, 136, 60, 0.15);
+}
+
+.program-card-inner {
+    background: var(--eductix-card-mint);
+    border-radius: calc(var(--radius-card) - 2px);
+    padding: 36px 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.program-icon-badge {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--eductix-emerald);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.program-content h4 {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--eductix-dark);
+    margin-bottom: 12px;
+}
+
+.program-content p {
+    font-size: 15px;
+    color: var(--eductix-muted);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   DYNAMIC COURSES GRID (FROM DATABASE)
+   ========================================================================== */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.course-card-premium {
+    background: var(--eductix-white);
+    border: 1px solid var(--eductix-border-card);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--eductix-card-shadow);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.course-card-premium:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--eductix-card-shadow-hover);
+    border-color: var(--eductix-emerald-border);
+}
+
+.course-card-thumb {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: #e2e8e5;
+}
+
+.course-card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.course-card-premium:hover .course-card-thumb img {
+    transform: scale(1.05);
+}
+
+.course-badge-top {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(0, 59, 45, 0.85);
+    backdrop-filter: blur(8px);
+    color: white;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 30px;
+    letter-spacing: 0.02em;
+}
+
+.course-badge-price {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    background: var(--eductix-emerald);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.course-card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    background: var(--eductix-white);
+}
+
+.course-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--eductix-light-muted);
+    margin-bottom: 12px;
+}
+
+.course-card-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.course-card-title {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--eductix-dark);
+    line-height: 1.35;
+    margin-bottom: 8px;
+}
+
+.course-card-instructor {
+    font-size: 14px;
+    color: var(--eductix-muted);
+    margin-bottom: 20px;
+}
+
+.course-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 59, 45, 0.06);
+}
+
+.course-action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-icon-action {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--eductix-card-mint);
+    border: 1px solid var(--eductix-border-subtle);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--eductix-forest);
+}
+
+.btn-icon-action:hover {
+    background: var(--eductix-white);
+    border-color: var(--eductix-emerald);
+    transform: scale(1.08);
+}
+
+.btn-icon-action.liked {
+    color: #e53e3e;
+    border-color: #feb2b2;
+    background: #fff5f5;
+}
+
+/* ==========================================================================
+   ESSENTIAL SKILLS SHOWCASE SECTION (PROPER EDUCTIX DESIGN)
+   ========================================================================== */
+.skills-showcase-section {
+    padding: 90px 32px;
+    background: var(--eductix-card-mint);
+    position: relative;
+    overflow: hidden;
+}
+
+.skills-showcase-grid {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.skills-text-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.skills-text-side .section-title {
+    font-size: 40px;
+    line-height: 1.15;
+    margin-bottom: 0;
+}
+
+.skills-features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 8px 0 16px;
+}
+
+.skills-features-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--eductix-slate);
+}
+
+.skills-features-list li .bullet-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(13, 136, 60, 0.15);
+    color: var(--eductix-emerald);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.skills-nav-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
+}
+
+.skills-arrow-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--eductix-white);
+    border: 1px solid var(--eductix-border-subtle);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--eductix-forest);
+    font-size: 20px;
+    box-shadow: 0 4px 14px rgba(0, 59, 45, 0.04);
+    transition: all 0.25s ease;
+}
+
+.skills-arrow-btn:hover {
+    background: var(--eductix-emerald);
+    color: white;
+    border-color: var(--eductix-emerald);
+    transform: scale(1.06);
+    box-shadow: 0 6px 20px rgba(13, 136, 60, 0.25);
+}
+
+.skills-slider-side {
+    width: 100%;
+    min-width: 0; /* CRITICAL FOR SWIPER INSIDE CSS GRID / FLEX */
+    overflow: hidden;
+    position: relative;
+    padding: 10px 0 30px;
+}
+
+.skills-slider-side .swiper {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    padding-bottom: 30px;
+}
+
+.skills-card {
+    height: 390px;
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 12px 36px rgba(0, 59, 45, 0.08);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    background: #00261d;
+    border: 1px solid rgba(0, 59, 45, 0.08);
+}
+
+.skills-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(0, 59, 45, 0.16);
+    border-color: var(--eductix-emerald-border);
+}
+
+.skills-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skills-card:hover img {
+    transform: scale(1.07);
+}
+
+.skills-card-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0, 38, 29, 0.85) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.skills-floating-bottom {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 24px rgba(0, 38, 29, 0.15);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.skills-card:hover .skills-floating-bottom {
+    background: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 38, 29, 0.2);
+}
+
+.skills-card-title-text {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--eductix-forest);
+    line-height: 1.25;
+}
+
+.skills-card-arrow-circle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--eductix-card-mint);
+    color: var(--eductix-emerald);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+}
+
+.skills-card:hover .skills-card-arrow-circle {
+    background: var(--eductix-emerald);
+    color: white;
+    transform: translateX(4px);
+}
+
+.skills-slider-side .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background: var(--eductix-muted);
+    opacity: 0.3;
+    transition: all 0.3s ease;
+}
+
+.skills-slider-side .swiper-pagination-bullet-active {
+    width: 24px;
+    border-radius: 6px;
+    background: var(--eductix-emerald);
+    opacity: 1;
+}
+
+@media (max-width: 1024px) {
+    .skills-showcase-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .skills-card {
+        height: 360px;
+    }
+}
+
+/* ==========================================================================
+   WHY EDUCTIX / WORK SECTION (ACCORDION)
+   ========================================================================== */
+.eductix-work-section {
+    padding: 100px 32px;
+}
+
+.eductix-work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.work-visual-card {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--eductix-card-shadow-hover);
+    height: 480px;
+    background: var(--eductix-forest);
+    position: relative;
+}
+
+.work-visual-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.accordion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.accordion-item {
+    background: var(--eductix-white);
+    border: 1px solid var(--eductix-border-card);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-item.active {
+    border-color: var(--eductix-emerald-border);
+    box-shadow: 0 6px 20px rgba(13, 136, 60, 0.08);
+}
+
+.accordion-header {
+    width: 100%;
+    padding: 20px 24px;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--eductix-forest);
+}
+
+.accordion-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--eductix-card-mint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--eductix-emerald);
+    font-weight: 700;
+    transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(45deg);
+    background: var(--eductix-emerald);
+    color: white;
+}
+
+.accordion-body {
+    padding: 0 24px 20px;
+    font-size: 15px;
+    color: var(--eductix-muted);
+    line-height: 1.6;
+    display: none;
+}
+
+.accordion-item.active .accordion-body {
+    display: block;
+}
+
+/* ==========================================================================
+   CORE LEARNING OUTCOMES (FEATURE PILLS)
+   ========================================================================== */
+.outcomes-grid-section {
+    padding: 100px 32px;
+    background: var(--eductix-card-mint);
+}
+
+.outcomes-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.outcomes-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.outcome-pill {
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.25s ease;
+    cursor: default;
+}
+
+.outcome-pill.mint {
+    background: var(--eductix-white);
+    color: var(--eductix-forest);
+    border: 1px solid var(--eductix-border-subtle);
+    box-shadow: 0 2px 8px rgba(0, 59, 45, 0.03);
+}
+
+.outcome-pill.mint:hover {
+    border-color: var(--eductix-emerald);
+    transform: translateX(4px);
+}
+
+.outcome-pill.emerald {
+    background: var(--eductix-emerald);
+    color: var(--eductix-white);
+    box-shadow: 0 4px 14px rgba(13, 136, 60, 0.2);
+}
+
+.outcome-pill.emerald:hover {
+    background: var(--eductix-emerald-hover);
+    transform: translateX(-4px);
+}
+
+.outcomes-timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.timeline-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--eductix-forest);
+    border: 3px solid var(--eductix-card-mint);
+    box-shadow: 0 0 0 2px var(--eductix-emerald);
+}
+
+.timeline-line {
+    width: 2px;
+    height: 48px;
+    background: linear-gradient(180deg, var(--eductix-forest), var(--eductix-emerald));
+}
+
+/* ==========================================================================
+   TESTIMONIALS (FROM DATABASE)
+   ========================================================================== */
+.testimonials-section {
+    padding: 100px 32px;
+    background: var(--eductix-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.testimonial-card-eductix {
+    background: var(--eductix-forest);
+    color: white;
+    border-radius: var(--radius-card);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 28px;
+    box-shadow: 0 16px 40px rgba(0, 59, 45, 0.15);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card-eductix:hover {
+    transform: translateY(-6px);
+}
+
+.testimonial-quote-icon {
+    font-size: 48px;
+    line-height: 1;
+    color: var(--eductix-emerald);
+    font-family: serif;
+    opacity: 0.8;
+}
+
+.testimonial-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #e2f0e8;
+    flex-grow: 1;
+}
+
+.testimonial-student-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.student-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--eductix-emerald);
+    background: #00261d;
+}
+
+.student-info h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+}
+
+.student-info p {
+    font-size: 13px;
+    color: #92b8a7;
+}
+
+/* ==========================================================================
+   PRICING PLANS
+   ========================================================================== */
+.pricing-section {
+    padding: 100px 32px;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    align-items: stretch;
+}
+
+.pricing-card {
+    border-radius: var(--radius-card);
+    padding: 36px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.pricing-card.standard {
+    background: var(--eductix-card-mint);
+    border: 1px solid var(--eductix-border-subtle);
+    box-shadow: var(--eductix-card-shadow);
+}
+
+.pricing-card.standard:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--eductix-card-shadow-hover);
+}
+
+.pricing-card.featured {
+    background: var(--eductix-emerald);
+    color: white;
+    box-shadow: 0 20px 48px rgba(13, 136, 60, 0.3);
+    transform: scale(1.03);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.03) translateY(-6px);
+}
+
+.pricing-header {
+    margin-bottom: 24px;
+}
+
+.pricing-tier-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.pricing-card.standard .pricing-tier-name {
+    color: var(--eductix-forest);
+}
+
+.pricing-price-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.pricing-amount {
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.pricing-period {
+    font-size: 15px;
+    opacity: 0.8;
+}
+
+.pricing-desc {
+    font-size: 14.5px;
+    line-height: 1.5;
+    opacity: 0.85;
+}
+
+.pricing-features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 32px 0;
+}
+
+.pricing-features-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14.5px;
+}
+
+.pricing-features-list li.disabled {
+    opacity: 0.45;
+    text-decoration: line-through;
+}
+
+.pricing-check-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+}
+
+.pricing-card.standard .pricing-check-icon {
+    background: var(--eductix-emerald-light);
+    color: var(--eductix-emerald);
+}
+
+.pricing-card.featured .pricing-check-icon {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+}
+
+/* ==========================================================================
+   FAQ SECTION
+   ========================================================================== */
+.faq-section {
+    padding: 100px 32px;
+    background: var(--eductix-card-mint);
+}
+
+.faq-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+/* ==========================================================================
+   CALL TO ACTION BANNER
+   ========================================================================== */
+.cta-banner-section {
+    padding: 60px 32px 100px;
+}
+
+.cta-banner-box {
+    background: var(--eductix-forest);
+    border-radius: 28px;
+    padding: 60px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0, 59, 45, 0.2);
+}
+
+.cta-banner-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 500px;
+    height: 500px;
+    background: var(--eductix-emerald);
+    filter: blur(120px);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.cta-banner-title {
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+    margin-bottom: 12px;
+}
+
+.cta-banner-desc {
+    font-size: 17px;
+    color: #b8d4c7;
+    max-width: 540px;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.eductix-footer {
+    background: var(--eductix-forest);
+    color: #eaf0ef;
+    padding: 80px 32px 32px;
+    position: relative;
+}
+
+.eductix-footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 48px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-brand h3 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.04em;
+    margin-bottom: 14px;
+}
+
+.footer-brand p {
+    font-size: 15px;
+    color: #92b8a7;
+    max-width: 320px;
+    line-height: 1.6;
+}
+
+.footer-col h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links a {
+    font-size: 14.5px;
+    color: #92b8a7;
+}
+
+.footer-links a:hover {
+    color: white;
+    transform: translateX(4px);
+}
+
+.social-pills-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.social-pill-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.2s ease;
+}
+
+.social-pill-btn:hover {
+    background: white;
+    color: var(--eductix-forest);
+    transform: translateY(-2px);
+}
+
+.eductix-footer-bottom {
+    padding-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #92b8a7;
+}
+
+.btn-back-to-top {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-back-to-top:hover {
+    background: white;
+    color: var(--eductix-forest);
+}
+
+/* ==========================================================================
+   RESPONSIVENESS (MOBILE & TABLET)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .eductix-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+    
+    .eductix-hero-title {
+        font-size: 48px;
+    }
+    
+    .courses-grid,
+    .programs-grid,
+    .testimonials-grid,
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .pricing-card.featured {
+        transform: none;
+    }
+    
+    .eductix-work-grid,
+    .faq-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .outcomes-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .outcomes-timeline {
+        display: none;
+    }
+    
+    .eductix-footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .eductix-nav-links,
+    .eductix-search-pill {
+        display: none;
+    }
+    
+    .eductix-nav-wrapper {
+        padding: 12px 16px;
+    }
+    
+    .eductix-section {
+        padding: 60px 20px;
+    }
+    
+    .section-title {
+        font-size: 32px;
+    }
+    
+    .eductix-hero-title {
+        font-size: 38px;
+    }
+    
+    .eductix-hero-visual {
+        grid-template-columns: 1fr;
+    }
+    
+    .eductix-stats-box {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    
+    .stat-item:not(:last-child)::after {
+        display: none;
+    }
+    
+    .courses-grid,
+    .programs-grid,
+    .testimonials-grid,
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-banner-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 24px;
+    }
+    
+    .eductix-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    
+    .eductix-footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+}

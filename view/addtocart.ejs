@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart – Eductix</title>
+    <!-- Google Fonts: Geist & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/eductix.css">
+
+    <style>
+        .cart-section-page {
+            padding: 40px 32px 100px;
+        }
+
+        .cart-grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .cart-item-card {
+            background: var(--eductix-white);
+            border: 1px solid var(--eductix-border-card);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--eductix-card-shadow);
+            transition: all 0.25s ease;
+        }
+
+        .cart-item-card:hover {
+            border-color: var(--eductix-emerald-border);
+            transform: translateY(-2px);
+        }
+
+        .cart-thumb {
+            width: 140px;
+            height: 100px;
+            border-radius: 14px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #e2e8e5;
+        }
+
+        .cart-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-info {
+            flex-grow: 1;
+        }
+
+        .cart-course-title {
+            font-family: var(--font-heading);
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--eductix-dark);
+            margin-bottom: 6px;
+        }
+
+        .cart-instructor {
+            font-size: 13.5px;
+            color: var(--eductix-muted);
+            margin-bottom: 12px;
+        }
+
+        .cart-price-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--eductix-forest);
+        }
+
+        .cart-summary-box {
+            background: var(--eductix-white);
+            border: 1px solid var(--eductix-border-card);
+            border-radius: var(--radius-card);
+            padding: 32px;
+            box-shadow: var(--eductix-card-shadow);
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            font-size: 14.5px;
+            color: var(--eductix-muted);
+        }
+
+        .summary-row.total-row {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--eductix-forest);
+            padding-top: 16px;
+            border-top: 1px solid rgba(0, 59, 45, 0.08);
+            margin-top: 16px;
+        }
+
+        .review-box-section {
+            margin-top: 60px;
+            padding-top: 60px;
+            border-top: 1px solid rgba(0, 59, 45, 0.08);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .review-form-card {
+            background: var(--eductix-white);
+            border-radius: var(--radius-card);
+            padding: 32px;
+            border: 1px solid var(--eductix-border-card);
+            box-shadow: var(--eductix-card-shadow);
+        }
+
+        .review-form-card input,
+        .review-form-card textarea,
+        .review-form-card select {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--eductix-card-mint);
+            border: 1px solid rgba(0, 59, 45, 0.12);
+            border-radius: 12px;
+            font-size: 14.5px;
+            color: var(--eductix-dark);
+            outline: none;
+            margin-bottom: 14px;
+        }
+
+        .user-review-bubble {
+            background: var(--eductix-card-mint);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--eductix-border-subtle);
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .cart-grid-layout,
+            .review-box-section {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-item-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cart-thumb {
+                width: 100%;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- OFFER BAR -->
+    <div class="eductix-offer-bar">
+        <span class="badge">Cart</span>
+        <span>Complete your enrollment today and unlock immediate course access.</span>
+        <a href="/" style="text-decoration: underline; color: #fff; font-weight: 600;">Continue Shopping →</a>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="eductix-nav-wrapper">
+        <nav class="eductix-nav">
+            <a href="/" class="eductix-brand">
+                Eductix<span class="brand-dot"></span>
+            </a>
+
+            <ul class="eductix-nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/#course-section">Courses</a></li>
+                <li><a href="/subscribe">Pricing</a></li>
+                <li><a href="/#faq-section">FAQ</a></li>
+            </ul>
+
+            <div class="eductix-nav-actions">
+                <a href="/userlogin" class="btn-eductix-outline">Log in</a>
+                <a href="/#course-section" class="btn-eductix-primary">
+                    <span>Explore</span>
+                    <span class="icon-circle">↗</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CART SECTION -->
+    <div class="eductix-container cart-section-page">
+        <div class="section-header" style="margin-bottom: 32px;">
+            <span class="section-tagline">Checkout</span>
+            <h1 class="section-title">Your Learning Cart</h1>
+        </div>
+
+        <div class="cart-grid-layout">
+            <!-- Left: Cart Items -->
+            <div>
+                <% if (addtocartcourse && addtocartcourse.length > 0) { %>
+                    <% for(let i=0; i < addtocartcourse.length; i++) { %>
+                        <div class="cart-item-card">
+                            <div class="cart-thumb">
+                                <img src="/images/<%= addtocartcourse[i].coursesthumbnailImage %>" alt="<%= addtocartcourse[i].courseName %>" onerror="this.src='/images/edubackground01.jpg'">
+                            </div>
+
+                            <div class="cart-info">
+                                <h3 class="cart-course-title"><%= addtocartcourse[i].courseName %></h3>
+                                <p class="cart-instructor">Instructor: <%= addtocartcourse[i].Instructor %></p>
+                                <div class="cart-price-tag">₹<%= addtocartcourse[i].courseFee %></div>
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <button class="btn-eductix-primary" style="padding: 10px 20px; font-size: 14px;" onclick="alert('Proceeding to course enrollment...')">
+                                    <span>Enroll</span>
+                                    <span class="icon-circle">↗</span>
+                                </button>
+                                <button class="btn-eductix-outline" style="color: #e53e3e; border-color: rgba(229, 62, 62, 0.3);" onclick="window.location='/removecart?coursetId=<%= addtocartcourse[i]._id %>'">
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } else { %>
+                    <div style="background: white; border-radius: var(--radius-card); padding: 60px 40px; text-align: center; border: 1px solid var(--eductix-border-card);">
+                        <h3 style="font-family: var(--font-heading); font-size: 24px; color: var(--eductix-forest); margin-bottom: 8px;">
+                            Your cart is currently empty
+                        </h3>
+                        <p style="color: var(--eductix-muted); margin-bottom: 24px;">Browse our popular courses and start learning today.</p>
+                        <a href="/#course-section" class="btn-eductix-primary">
+                            <span>Explore Courses</span>
+                            <span class="icon-circle">↗</span>
+                        </a>
+                    </div>
+                <% } %>
+            </div>
+
+            <!-- Right: Order Summary -->
+            <div>
+                <div class="cart-summary-box">
+                    <h3 style="font-family: var(--font-heading); font-size: 20px; color: var(--eductix-forest); margin-bottom: 20px;">
+                        Price Summary
+                    </h3>
+
+                    <% let total = 0; %>
+                    <% if (addtocartcourse && addtocartcourse.length > 0) { %>
+                        <% for (let i = 0; i < addtocartcourse.length; i++) { %>
+                            <% let price = addtocartcourse[i].courseFee ? addtocartcourse[i].courseFee.toString().replace(/,/g, '') : 0; %>
+                            <% total += parseInt(price) || 0; %>
+                            <div class="summary-row">
+                                <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">
+                                    <%= addtocartcourse[i].courseName %>
+                                </span>
+                                <span>₹<%= addtocartcourse[i].courseFee %></span>
+                            </div>
+                        <% } %>
+                    <% } %>
+
+                    <div class="summary-row" style="color: var(--eductix-emerald); font-weight: 600;">
+                        <span>Seasonal Discount</span>
+                        <span>− ₹299</span>
+                    </div>
+
+                    <div class="summary-row total-row">
+                        <span>Total</span>
+                        <span>₹<%= Math.max(0, total - 299) %></span>
+                    </div>
+
+                    <button class="btn-eductix-primary" style="width: 100%; justify-content: center; margin-top: 24px; padding: 14px;" onclick="alert('Proceeding to secure payment...')">
+                        <span>Checkout Now</span>
+                        <span class="icon-circle">↗</span>
+                    </button>
+                    
+                    <p style="text-align: center; font-size: 12px; color: var(--eductix-light-muted); margin-top: 12px;">
+                        🔒 30-Day Money-Back Guarantee
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- REVIEWS SECTION -->
+        <div class="review-box-section">
+            <!-- Add Review Form -->
+            <div class="review-form-card">
+                <h3 style="font-family: var(--font-heading); font-size: 22px; color: var(--eductix-forest); margin-bottom: 6px;">
+                    Leave a Course Review
+                </h3>
+                <p style="font-size: 14px; color: var(--eductix-muted); margin-bottom: 20px;">Share your learning experience with our global community.</p>
+
+                <form action="/user/addreview" method="POST" enctype="multipart/form-data">
+                    <label style="display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 4px; color: var(--eductix-slate);">Your Name</label>
+                    <input type="text" name="Name" placeholder="e.g. Alex Johnson" required>
+
+                    <label style="display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 4px; color: var(--eductix-slate);">Course Name</label>
+                    <input type="text" name="courseName" placeholder="e.g. Web Development Masterclass" required>
+
+                    <label style="display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 4px; color: var(--eductix-slate);">Your Review</label>
+                    <textarea name="review" rows="3" placeholder="What did you think of the curriculum and mentor?" required></textarea>
+
+                    <label style="display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 4px; color: var(--eductix-slate);">Rating</label>
+                    <select name="rating">
+                        <option value="5">⭐⭐⭐⭐⭐ (5 Stars - Outstanding)</option>
+                        <option value="4">⭐⭐⭐⭐ (4 Stars - Great)</option>
+                        <option value="3">⭐⭐⭐ (3 Stars - Good)</option>
+                    </select>
+
+                    <label style="display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 4px; color: var(--eductix-slate);">Profile Picture</label>
+                    <input type="file" name="Image">
+
+                    <button type="submit" class="btn-eductix-primary" style="margin-top: 8px;">
+                        <span>Submit Review</span>
+                        <span class="icon-circle">↗</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Student Reviews Stream -->
+            <div>
+                <h3 style="font-family: var(--font-heading); font-size: 22px; color: var(--eductix-forest); margin-bottom: 16px;">
+                    Community Feedback
+                </h3>
+
+                <% if (typeof userreviews !== 'undefined' && userreviews && userreviews.length > 0) { %>
+                    <% for(let i=0; i < userreviews.length; i++) { %>
+                        <div class="user-review-bubble">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <img src="/images/<%= userreviews[i].Image %>" alt="" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;" onerror="this.src='/images/userProfile.png'">
+                                    <strong style="font-size: 15px; color: var(--eductix-dark);"><%= userreviews[i].Name %></strong>
+                                </div>
+                                <span style="font-size: 13px; color: #f59e0b;">★★★★★</span>
+                            </div>
+                            <p style="font-size: 14.5px; color: var(--eductix-muted); line-height: 1.5;">
+                                "<%= userreviews[i].review %>"
+                            </p>
+                        </div>
+                    <% } %>
+                <% } else { %>
+                    <div class="user-review-bubble">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <strong style="font-size: 15px; color: var(--eductix-dark);">Alex Merritt</strong>
+                            <span style="font-size: 13px; color: #f59e0b;">★★★★★</span>
+                        </div>
+                        <p style="font-size: 14.5px; color: var(--eductix-muted); line-height: 1.5;">
+                            "The curriculum gave me hands-on projects that I immediately presented in job interviews. Highly recommended!"
+                        </p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="eductix-footer">
+        <div class="eductix-container">
+            <div class="eductix-footer-grid">
+                <div class="footer-brand">
+                    <h3>Eductix<span style="color: var(--eductix-emerald);">.</span></h3>
+                    <p>Build Skills. Build Your Future. A modern education ecosystem designed for ambitious learners worldwide.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Navigation</h5>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#course-section">Courses</a></li>
+                        <li><a href="/subscribe">Pricing</a></li>
+                        <li><a href="/#faq-section">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Account</h5>
+                    <ul class="footer-links">
+                        <li><a href="/userlogin">Log in</a></li>
+                        <li><a href="/usersignup">Sign up</a></li>
+                        <li><a href="/cart">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Support</h5>
+                    <p style="font-size: 14px; color: #92b8a7;">Need assistance with payment or course registration? We are here to help.</p>
+                </div>
+            </div>
+
+            <div class="eductix-footer-bottom">
+                <p>© 2026 Eductix. All rights reserved.</p>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-back-to-top">
+                    <span>Back To Top</span>
+                    <span>↑</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
