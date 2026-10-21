@@ -1,15 +1,13 @@
 {
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "dotenv": "^17.3.1",
-    "ejs": "^4.0.1",
-    "express": "^5.2.1",
-    "mongoose": "^9.2.4",
-    "multer": "^2.1.1",
-    "nodemon": "^3.1.14"
-  },
+  "name": "eductix-platform",
+  "version": "2.0.0",
+  "description": "Eductix Learning Platform - Decoupled Next.js Frontend & Express Backend",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
   }
 }
