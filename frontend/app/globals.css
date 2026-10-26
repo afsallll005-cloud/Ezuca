@@ -139,6 +139,18 @@ img {
     gap: 12px;
     z-index: 100;
     position: relative;
+    transition: all 0.3s ease;
+}
+
+.eductix-offer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    text-align: center;
+    max-width: 1280px;
+    width: 100%;
 }
 
 .eductix-offer-bar span.badge {
@@ -150,6 +162,20 @@ img {
     letter-spacing: 0.05em;
     padding: 3px 10px;
     border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.eductix-offer-bar .offer-link {
+    text-decoration: underline;
+    color: #ffffff;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.eductix-offer-bar .offer-link:hover {
+    opacity: 0.85;
 }
 
 /* Navigation Bar */
@@ -162,6 +188,16 @@ img {
     display: flex;
     justify-content: center;
     transition: all 0.3s ease;
+}
+
+.eductix-nav-wrapper.scrolled {
+    padding: 10px 32px;
+}
+
+.eductix-nav-wrapper.scrolled .eductix-nav {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 30px rgba(0, 59, 45, 0.09);
+    border-color: rgba(0, 59, 45, 0.12);
 }
 
 .eductix-nav {
@@ -177,6 +213,7 @@ img {
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 4px 24px rgba(0, 59, 45, 0.04);
+    transition: all 0.3s ease;
 }
 
 .eductix-brand {
@@ -311,6 +348,317 @@ img {
     justify-content: center;
     padding: 0 4px;
     border: 2px solid white;
+}
+
+/* Mobile Toggle (Hamburger Button) */
+.eductix-mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--eductix-bg-sage);
+    border: 1px solid rgba(0, 59, 45, 0.08);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0;
+    color: var(--eductix-forest);
+    position: relative;
+}
+
+.eductix-mobile-toggle:hover {
+    background: var(--eductix-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 59, 45, 0.08);
+}
+
+.hamburger-line {
+    width: 18px;
+    height: 2px;
+    background-color: var(--eductix-forest);
+    border-radius: 2px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    transform-origin: center;
+}
+
+.eductix-mobile-toggle.is-active .line-1 {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.eductix-mobile-toggle.is-active .line-2 {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.eductix-mobile-toggle.is-active .line-3 {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile Drawer Backdrop */
+.eductix-mobile-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 24, 18, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.eductix-mobile-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Mobile Drawer Panel */
+.eductix-mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 360px;
+    background: var(--eductix-white);
+    z-index: 1001;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 35px rgba(0, 39, 30, 0.15);
+}
+
+.eductix-mobile-drawer.is-open {
+    transform: translateX(0);
+}
+
+/* Mobile Drawer Header */
+.mobile-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(0, 59, 45, 0.08);
+}
+
+.drawer-close-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--eductix-bg-sage);
+    border: 1px solid rgba(0, 59, 45, 0.08);
+    color: var(--eductix-forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.drawer-close-btn:hover {
+    background: var(--eductix-forest);
+    color: #ffffff;
+    transform: rotate(90deg);
+}
+
+/* Mobile Drawer Search */
+.mobile-drawer-search {
+    padding: 16px 20px 8px;
+}
+
+.mobile-search-pill {
+    display: flex;
+    align-items: center;
+    background: var(--eductix-bg-sage);
+    border: 1px solid rgba(0, 59, 45, 0.08);
+    border-radius: var(--radius-pill);
+    padding: 5px 6px 5px 14px;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.mobile-search-pill:focus-within {
+    background: #ffffff;
+    border-color: var(--eductix-emerald);
+    box-shadow: 0 0 0 3px rgba(13, 136, 60, 0.12);
+}
+
+.mobile-search-pill input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: var(--eductix-dark);
+    width: 100%;
+}
+
+.mobile-search-pill .search-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--eductix-muted);
+    flex-shrink: 0;
+}
+
+.mobile-search-pill .search-submit-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--eductix-emerald);
+    color: #ffffff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mobile-search-pill .search-submit-btn:hover {
+    background: var(--eductix-emerald-hover);
+    transform: scale(1.05);
+}
+
+/* Mobile Drawer Content & Nav List */
+.mobile-drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mobile-drawer-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.mobile-drawer-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 59, 45, 0.12);
+    border-radius: 4px;
+}
+
+.mobile-group-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--eductix-light-muted);
+    margin-bottom: 8px;
+    padding-left: 6px;
+    display: block;
+}
+
+.mobile-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.mobile-nav-list a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    color: var(--eductix-slate);
+    font-size: 14.5px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.mobile-nav-list a:hover,
+.mobile-nav-list a.active {
+    background: var(--eductix-card-mint);
+    color: var(--eductix-forest);
+}
+
+.mobile-nav-list a.active {
+    font-weight: 600;
+}
+
+.mobile-nav-list a.admin-link {
+    color: var(--eductix-emerald);
+    font-weight: 600;
+}
+
+.nav-item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--eductix-muted);
+    width: 22px;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+}
+
+.mobile-nav-list a:hover .nav-item-icon,
+.mobile-nav-list a.active .nav-item-icon {
+    color: var(--eductix-emerald);
+}
+
+.nav-item-text {
+    flex: 1;
+}
+
+.nav-item-pill {
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(13, 136, 60, 0.1);
+    color: var(--eductix-emerald);
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.nav-admin-badge {
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--eductix-forest);
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
+}
+
+.badge-count-inline {
+    background: var(--eductix-emerald);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+}
+
+/* Mobile Drawer Footer */
+.mobile-drawer-footer {
+    padding: 16px 20px 24px;
+    border-top: 1px solid rgba(0, 59, 45, 0.08);
+    background: #fafcfb;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.full-width {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+.eductix-desktop-only {
+    display: inline-flex;
 }
 
 /* Buttons */
@@ -1643,8 +1991,67 @@ img {
     color: var(--eductix-forest);
 }
 
-/* Responsive */
+/* Responsive Navigation & Page Layout */
+
+/* 1. Laptop Breakpoint (1025px - 1240px) */
+@media (max-width: 1240px) and (min-width: 1025px) {
+    .eductix-nav-wrapper {
+        padding: 14px 20px;
+    }
+    .eductix-nav {
+        padding: 8px 18px;
+    }
+    .eductix-nav-links {
+        gap: 16px;
+    }
+    .eductix-nav-links a {
+        font-size: 14px;
+    }
+    .eductix-search-pill input {
+        width: 140px;
+        padding: 8px 14px 8px 36px;
+        font-size: 13.5px;
+    }
+    .eductix-search-pill input:focus {
+        width: 180px;
+    }
+    .eductix-nav-actions {
+        gap: 8px;
+    }
+    .btn-eductix-primary {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+    .btn-eductix-outline {
+        padding: 8px 16px;
+        font-size: 13.5px;
+    }
+}
+
+/* 2. Tablet Landscape / Medium Screens (<= 1024px) */
 @media (max-width: 1024px) {
+    .eductix-nav-wrapper {
+        padding: 12px 20px;
+    }
+    
+    .eductix-nav {
+        padding: 8px 18px;
+    }
+    
+    .eductix-nav-links,
+    .eductix-search-pill,
+    .eductix-desktop-only {
+        display: none !important;
+    }
+    
+    .eductix-mobile-toggle {
+        display: flex;
+    }
+    
+    .eductix-nav-actions {
+        gap: 10px;
+    }
+
     .eductix-hero-grid,
     .skills-showcase-grid {
         grid-template-columns: 1fr;
@@ -1679,14 +2086,23 @@ img {
     }
 }
 
+/* 3. Mobile & Tablet Portrait (<= 768px) */
 @media (max-width: 768px) {
-    .eductix-nav-links,
-    .eductix-search-pill {
-        display: none;
+    .eductix-offer-bar {
+        padding: 8px 14px;
+        font-size: 12.5px;
     }
     
+    .eductix-offer-content {
+        gap: 6px 10px;
+    }
+
     .eductix-nav-wrapper {
-        padding: 12px 16px;
+        padding: 10px 16px;
+    }
+    
+    .eductix-nav {
+        padding: 8px 16px;
     }
     
     .eductix-section {
@@ -1732,5 +2148,80 @@ img {
         flex-direction: column;
         gap: 16px;
         text-align: center;
+    }
+}
+
+/* 4. Compact Mobile Devices (<= 480px) */
+@media (max-width: 480px) {
+    .eductix-offer-bar {
+        font-size: 11.5px;
+        padding: 6px 10px;
+    }
+    
+    .eductix-offer-bar span.badge {
+        font-size: 10px;
+        padding: 2px 7px;
+    }
+
+    .eductix-nav-wrapper {
+        padding: 8px 12px;
+    }
+    
+    .eductix-nav {
+        padding: 6px 12px;
+        border-radius: 40px;
+    }
+    
+    .eductix-brand {
+        font-size: 20px;
+    }
+    
+    .eductix-icon-btn {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .eductix-mobile-toggle {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .hamburger-line {
+        width: 16px;
+    }
+    
+    .eductix-mobile-drawer {
+        max-width: 100%;
+    }
+    
+    .mobile-drawer-header {
+        padding: 16px 18px;
+    }
+    
+    .mobile-drawer-search {
+        padding: 12px 16px 6px;
+    }
+    
+    .mobile-drawer-content {
+        padding: 10px 14px 18px;
+    }
+    
+    .mobile-drawer-footer {
+        padding: 14px 16px 20px;
+    }
+}
+
+/* 5. Ultra Compact Mobile (<= 360px) */
+@media (max-width: 360px) {
+    .eductix-brand {
+        font-size: 18px;
+    }
+    
+    .eductix-profile-btn {
+        display: none;
+    }
+    
+    .eductix-nav-actions {
+        gap: 6px;
     }
 }
